@@ -1,14 +1,14 @@
-FROM ubuntu:21.04
+FROM ubuntu:latest
 ENV DEBIAN_FRONTEND=noninteractive
 
 ARG NODE_VERSION=v16.14.0
 
-RUN apt-get install sed
-RUN apt-get dist-upgrade
-RUN sed -i -e 's/archive.ubuntu.com\|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
-RUN sed -i -e 's/archive.ubuntu.com\|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list.d/official-package-repositories.list
-RUN grep -E 'archive.ubuntu.com|security.ubuntu.com' /etc/apt/sources.list.d/*  
-RUN apt-get update
+#RUN apt-get install sed
+#RUN apt-get dist-upgrade
+#RUN sed -i -e 's/archive.ubuntu.com\|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
+#RUN sed -i -e 's/archive.ubuntu.com\|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list.d/official-package-repositories.list
+#RUN grep -E 'archive.ubuntu.com|security.ubuntu.com' /etc/apt/sources.list.d/*  
+#RUN apt-get update
 
 RUN apt-get update && apt-get upgrade -y
 
