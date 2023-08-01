@@ -11,7 +11,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...  
-      - codebuild-breakpoint
+      #- codebuild-breakpoint
       - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 593204228656.dkr.ecr.us-east-2.amazonaws.com
       - docker build -t custom_image_testing .
       #- docker tag image_from_another_account:latest 461693547282.dkr.ecr.us-west-2.amazonaws.com/image_from_another_account:latest
