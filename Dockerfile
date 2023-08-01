@@ -3,8 +3,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 ARG NODE_VERSION=v16.14.0
 
-RUN apt-get update && \
-    apt-get upgrade -y
+RUN apt-get update && apt-get upgrade -y
 
 #RUN http_proxy=$http_proxy https_proxy=$http_proxy add-apt-repository ppa:deadsnakes/ppa -y
 #RUN http_proxy=$http_proxy https_proxy=$http_proxy apt-get update
@@ -29,8 +28,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ###################UNCOMMENT###########################
 ############ INSTALL Node + aws-cdk ############
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
-    apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && apt-get install -y nodejs
 #RUN npm config set registry http://registry.npmjs.org/
 # cdk v2
 RUN npm config set strict-ssl false && npm install -g aws-cdk@2.14.0
