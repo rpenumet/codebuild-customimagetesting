@@ -1,15 +1,6 @@
 FROM ubuntu:latest
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG NODE_VERSION=v16.14.0
-
-#RUN apt-get install sed
-#RUN apt-get dist-upgrade
-#RUN sed -i -e 's/archive.ubuntu.com\|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
-#RUN sed -i -e 's/archive.ubuntu.com\|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list.d/official-package-repositories.list
-#RUN grep -E 'archive.ubuntu.com|security.ubuntu.com' /etc/apt/sources.list.d/*  
-#RUN apt-get update
-
 RUN apt-get update && apt-get upgrade -y
 
 #RUN http_proxy=$http_proxy https_proxy=$http_proxy add-apt-repository ppa:deadsnakes/ppa -y
@@ -27,6 +18,12 @@ RUN apt-get update
 RUN apt-get install python3 python3-pip python3-dev python3-setuptools -y
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+
+########### USE USERPROXY CERTS ############
+COPY certs/ /usr/local/share/ca-certificates/
+RUN update-ca-certificates
+############################################
+
 ########### INSTALL PYTHON3.8 FOR COMPATIBILITY WITH CDE ############
 ##RUN http_proxy=$http_proxy https_proxy=$http_proxy add-apt-repository ppa:deadsnakes/ppa -y
 ##RUN http_proxy=$http_proxy https_proxy=$http_proxy apt-get update
@@ -35,10 +32,10 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ###################UNCOMMENT###########################
 ############ INSTALL Node + aws-cdk ############
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && apt-get install -y nodejs
 #RUN npm config set registry http://registry.npmjs.org/
 # cdk v2
-RUN npm config set strict-ssl false && npm install -g aws-cdk@2.14.0
+RUN npm config set strict-ssl false && npm install -g aws-cdk@2.88.0
 #Uncomment for cdk v1
 #RUN npm install -g aws-cdk cdk-assume-role-credential-plugin
 ####################################
@@ -56,6 +53,7 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 RUN unzip awscliv2.zip
 RUN ./aws/install
 
+RUN git config --global http.proxyAuthMethod 'basic'
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.37.2/install.sh | https_proxy=$http_proxy bash
 ###################UNCOMMENT###########################
 
