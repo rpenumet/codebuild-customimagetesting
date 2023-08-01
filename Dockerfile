@@ -3,8 +3,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 ARG NODE_VERSION=v16.14.0
 
-RUN apt-get update && apt-get upgrade -y
-
 #RUN http_proxy=$http_proxy https_proxy=$http_proxy add-apt-repository ppa:deadsnakes/ppa -y
 #RUN http_proxy=$http_proxy https_proxy=$http_proxy apt-get update
 #RUN http_proxy=$http_proxy https_proxy=$http_proxy apt-get install python3.8 python3-dev python3-setuptools -y
