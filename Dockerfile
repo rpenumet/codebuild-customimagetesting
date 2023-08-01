@@ -3,6 +3,14 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 ARG NODE_VERSION=v16.14.0
 
+RUN sudo apt-get dist-upgrade
+RUN sudo sed -i -e 's/archive.ubuntu.com\|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
+RUN sudo sed -i -e 's/archive.ubuntu.com\|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list.d/official-package-repositories.list
+RUN grep -E 'archive.ubuntu.com|security.ubuntu.com' /etc/apt/sources.list.d/*  
+RUN sudo apt-get update
+
+RUN apt-get update && apt-get upgrade -y
+
 #RUN http_proxy=$http_proxy https_proxy=$http_proxy add-apt-repository ppa:deadsnakes/ppa -y
 #RUN http_proxy=$http_proxy https_proxy=$http_proxy apt-get update
 #RUN http_proxy=$http_proxy https_proxy=$http_proxy apt-get install python3.8 python3-dev python3-setuptools -y
