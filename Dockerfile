@@ -18,12 +18,6 @@ RUN apt-get update
 RUN apt-get install python3 python3-pip python3-dev python3-setuptools -y
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-
-########### USE USERPROXY CERTS ############
-COPY certs/ /usr/local/share/ca-certificates/
-RUN update-ca-certificates
-############################################
-
 ########### INSTALL PYTHON3.8 FOR COMPATIBILITY WITH CDE ############
 ##RUN http_proxy=$http_proxy https_proxy=$http_proxy add-apt-repository ppa:deadsnakes/ppa -y
 ##RUN http_proxy=$http_proxy https_proxy=$http_proxy apt-get update
