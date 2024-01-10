@@ -12,11 +12,11 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...  
       #- codebuild-breakpoint
-      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 593204228656.dkr.ecr.us-east-2.amazonaws.com
-      - docker build -t custom_image_testing .
+      - aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 593204228656.dkr.ecr.us-west-1.amazonaws.com
+      - docker build -t bootcamp-demo-repo .
       #- docker tag image_from_another_account:latest 461693547282.dkr.ecr.us-west-2.amazonaws.com/image_from_another_account:latest
-      - docker tag custom_image_testing:latest 593204228656.dkr.ecr.us-east-2.amazonaws.com/custom_image_testing:latest
-      - docker push 593204228656.dkr.ecr.us-east-2.amazonaws.com/custom_image_testing:latest
+      - docker tag bootcamp-demo-repo:latest 593204228656.dkr.ecr.us-west-1.amazonaws.com/bootcamp-demo-repo:latest
+      - docker push 593204228656.dkr.ecr.us-west-1.amazonaws.com/bootcamp-demo-repo:latest
   post_build:
     commands:
       - echo Build completed on `date`
